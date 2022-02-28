@@ -99,7 +99,9 @@ echo "XCFramework created successuflly at the output path."
 
 # Zip the XCFRamework
 echo "Start zipping XCFramework file..."
-cd $OUTPUT_PATH; zip -r $OUTPUT_FILE_NAME.zip $OUTPUT_FILE_NAME.xcframework; cd -;
+cd $OUTPUT_PATH; zip -r $OUTPUT_FILE_NAME.zip $OUTPUT_FILE_NAME.xcframework
+rm -r $OUTPUT_FILE_NAME.xcframework
+cd -
 echo "XCFramework file zipped successuflly at the output path."
 
 # Compute and save the checksum
