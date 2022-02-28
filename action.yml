@@ -1,0 +1,17 @@
+name: "spm-create-xcframework"
+description: "Github Action to create XCFramework for Swift package."
+
+inputs:
+  target:
+    description: "The target name you want to create XCFramework for."
+    required: true
+  zip-version:
+    description: "The version number to append to the name of the zip file."
+    required: true
+  output-path:
+    description: "A path where to save the output fiels locally for later usage."
+    required: false
+
+runs:
+  using: node12
+  main: action.js
