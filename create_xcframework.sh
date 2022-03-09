@@ -107,5 +107,5 @@ echo "XCFramework file zipped successuflly at the output path."
 # Compute and save the checksum
 echo "Start computing the checksum for the zipped XCFramework..."
 CHECKSUM=$(swift package compute-checksum $OUTPUT_PATH/$OUTPUT_FILE_NAME.zip)
-echo -n CHECKSUM > $OUTPUT_PATH/$OUTPUT_FILE_NAME.sha256
+echo -n $CHECKSUM > $OUTPUT_PATH/$OUTPUT_FILE_NAME.sha256
 echo "Checksum saved successuflly at the output path."
