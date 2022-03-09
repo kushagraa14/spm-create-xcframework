@@ -39,6 +39,7 @@ then
       OUTPUT_PATH="."
 fi
 
+XCFRAMEWORK_FILE_NAME="${TARGET_NAME}"
 OUTPUT_FILE_NAME="${TARGET_NAME}-${ZIP_VERSION}"
 
 # Archive the target for all platforms that we plan to support
@@ -93,19 +94,19 @@ done
 xcodebuild -create-xcframework \
 -framework $ARCHIVE_BASE_PATH/Release-iphoneos.xcarchive/Products/usr/local/lib/$TARGET_NAME.framework \
 -framework $ARCHIVE_BASE_PATH/Release-iphonesimulator.xcarchive/Products/usr/local/lib/$TARGET_NAME.framework \
--output $OUTPUT_PATH/$OUTPUT_FILE_NAME.xcframework
+-output $OUTPUT_PATH/$XCFRAMEWORK_FILE_NAME.xcframework
 echo "XCFramework created successuflly at the output path."
-
 
 # Zip the XCFRamework
 echo "Start zipping XCFramework file..."
-cd $OUTPUT_PATH; zip -r $OUTPUT_FILE_NAME.zip $OUTPUT_FILE_NAME.xcframework
-rm -r $OUTPUT_FILE_NAME.xcframework
+cd $OUTPUT_PATH; zip -r $OUTPUT_FILE_NAME.zip $XCFRAMEWORK_FILE_NAME.xcframework
+rm -r $XCFRAMEWORK_FILE_NAME.xcframework
 cd -
 echo "XCFramework file zipped successuflly at the output path."
 
 # Compute and save the checksum
 echo "Start computing the checksum for the zipped XCFramework..."
 CHECKSUM=$(swift package compute-checksum $OUTPUT_PATH/$OUTPUT_FILE_NAME.zip)
-echo -n $CHECKSUM > $OUTPUT_PATH/$OUTPUT_FILE_NAME.sha256
+echo $CHECKSUM > $OUTPUT_PATH/$OUTPUT_FILE_NAME.sha256
+echo "Checksum: ${CHECKSUM}"
 echo "Checksum saved successuflly at the output path."
